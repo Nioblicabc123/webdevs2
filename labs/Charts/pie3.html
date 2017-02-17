@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Game', 'People'],
+          ['Halo 5: Guardians',     11],
+          ['Call of Duty: Black ops 2',      9],
+          ['Grand Theft Auto V',  9],
+          ['Killzone 3', 6],
+          ['Roblox',    7]
+        ]);
+
+        var options = {
+          title: 'Games People Enjoy',
+          is3D: true,
+         pieSliceText: 'label',
+          slices: {  4: {offset: 0.2},
+                    12: {offset: 0.3},
+                    14: {offset: 0.4},
+                    15: {offset: 0.5},
+          },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
