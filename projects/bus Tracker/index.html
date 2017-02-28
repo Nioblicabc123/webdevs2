@@ -6,10 +6,11 @@
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-
- 
+ <p>Press button below to find buses</p>
+ <button id="submit">Lane Tech buses near you!</button>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script>
+      $("#submit").click()
         $(function() {
           
           
@@ -23,15 +24,17 @@
               dataType: "json",
               method: 'GET',
               data: {"apiEndpoint": apiEndpoint,
-                      "key" : "AAmMAkDETeNk7X2RvJGpWeRtC",
-                      "format":"json"}
+                      "key" : "yam3mQaEAaVpZBEJ8kHpmfsET",
+                      "format":"json",
+                      "stpid":"8417",
+                      "stpid":"12527"
+              }
             }).done (function (data) {
               console.log(data);
               $("body").append("<h1>Bus Routes</h1>");
              
               $.each(data["bustime-response"]["routes"], function(i,v) {
                   $("body").append("Route #" + v.rt + ", " + v.rtnm + "<br>");
-                
               })
 
             });
