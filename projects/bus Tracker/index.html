@@ -4,19 +4,29 @@
   <meta charset="utf-8">
   <title>jQuery.parseXML demo</title>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <style> 
+  #results{
+    background-color: silver;
+    border: solid black 1px;
+    padding: 5px;
+    border-radius:2px;
+  }
+  </style>
 </head>
 <body>
- <p>Press button below to find buses</p>
- <button id="submit">Lane Tech buses near you!</button>
+ <p>Press the button to see buses near Lane Tech</p>
+ <button id="submit">View Buses Near Lane Tech</button>
+ <br>
+ <div id="results"></div>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script>
-      $("#submit").click()
-        $(function() {
-          
+      $("#results").hide()
+      $("#submit").click(function() {
+         $("#results").empty().show() 
           
           var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
           
-          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getroutes";
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions";
           
           
           $.ajax({
@@ -26,20 +36,21 @@
               data: {"apiEndpoint": apiEndpoint,
                       "key" : "yam3mQaEAaVpZBEJ8kHpmfsET",
                       "format":"json",
-                      "stpid":"8417",
-                      "stpid":"12527"
+                      "rt":"49,X49,152",
+                      "stpid":"8417,12527"
               }
             }).done (function (data) {
               console.log(data);
-              $("body").append("<h1>Bus Routes</h1>");
+              $("#results").append("<h1>Bus Routes</h1>");
              
               $.each(data["bustime-response"]["routes"], function(i,v) {
-                  $("body").append("Route #" + v.rt + ", " + v.rtnm + "<br>");
+                  $("#results").append("Route #" + v.rt + ", " + v.rtnm + "Scheduled Arrival Time" + v.prd + "Time left until arrival" + v.prdctdn +  "<br>");
               })
 
             });
         });
-            
+           
+         
   
 </script>
  
