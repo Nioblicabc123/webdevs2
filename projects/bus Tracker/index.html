@@ -5,24 +5,44 @@
   <title>jQuery.parseXML demo</title>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <style> 
-  #results{
-    background-color: silver;
+  #rt152{
+    background-color: red;
     border: solid black 1px;
     padding: 5px;
     border-radius:2px;
   }
+  #rt49{
+    background-color: blue;
+    border: solid black 1px;
+    padding: 5px;
+    border-radius:2px;
+  }
+  #rtX49{
+    background-color: white;
+    border: solid black 1px;
+    padding: 5px;
+    border-radius:2px;
+  }
+  #submit{border-radius:2px;}
   </style>
 </head>
 <body>
- <p>Press the button to see buses near Lane Tech</p>
- <button id="submit">View Buses Near Lane Tech</button>
+    <h1>Bus Tracker App</h1>
+ <p>Click the Button to see Busses</p>
+ <button id="submit">View Busses</button></center>
  <br>
- <div id="results"></div>
+ <div id="rtX49"></div>
+ <div id="rt49"></div>
+ <div id="rt152"></div>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script>
-      $("#results").hide()
+      $("#rtX49").hide()
+      $("#rt49").hide()
+      $("#rt152").hide()
       $("#submit").click(function() {
-         $("#results").empty().show() 
+         $("#rtX49").empty().show()
+         $("#rt49").empty().show()
+         $("#rt152").empty().show()
           
           var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
           
@@ -41,10 +61,18 @@
               }
             }).done (function (data) {
               console.log(data);
-              $("#results").append("<h1>Bus Routes</h1>");
-             
-              $.each(data["bustime-response"]["routes"], function(i,v) {
-                  $("#results").append("Route #" + v.rt + ", " + v.rtnm + "Scheduled Arrival Time" + v.prd + "Time left until arrival" + v.prdctdn +  "<br>");
+             $("#rtX49").append("<h2>Route X49</h2>")
+             $("#rt49").append("<h2>Route 49</h2>")
+             $("#rt152").append("<h2>Route 152</h2>")
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#rt" + v.rt).append("Route Number: " + v.rt
+                  +  "<br>" 
+                  + "Route Direction: " + v.rtdir 
+                  + "<br>"
+                  + "Scheduled Arrival Time: " + v.prd  
+                  + "<br>"
+                  +  "Time left until arrival: " + v.prdctdn 
+                  + "<hr>");
               })
 
             });
