@@ -5,31 +5,34 @@
   <title>jQuery.parseXML demo</title>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <style> 
-  #rt152{
-    background-color: red;
-    border: solid black 1px;
-    padding: 5px;
-    border-radius:2px;
-  }
-  #rt49{
+  body{background-color:red;}
+    #rtX49{
     background-color: blue;
     border: solid black 1px;
     padding: 5px;
     border-radius:2px;
   }
-  #rtX49{
+  #rt49{
     background-color: white;
     border: solid black 1px;
     padding: 5px;
     border-radius:2px;
   }
-  #submit{border-radius:2px;}
+  #rt152{
+    background-color: purple;
+    border: solid black 1px;
+    padding: 5px;
+    border-radius:2px;
+  }
+  #submit{border-radius:2px;
+      background-color:Yellow;
+  }
   </style>
 </head>
 <body>
-    <h1>Bus Tracker App</h1>
- <p>Click the Button to see Busses</p>
- <button id="submit">View Busses</button></center>
+    <h1>Bus Tracker</h1>
+ <p>Click the button!</p>
+ <center><button id="submit">Bus schedules!</button></center>
  <br>
  <div id="rtX49"></div>
  <div id="rt49"></div>
@@ -57,7 +60,7 @@
                       "key" : "yam3mQaEAaVpZBEJ8kHpmfsET",
                       "format":"json",
                       "rt":"49,X49,152",
-                      "stpid":"8417,12527"
+                      "stpid":"8417,12527,12569,8195,8417"
               }
             }).done (function (data) {
               console.log(data);
@@ -69,9 +72,15 @@
                   +  "<br>" 
                   + "Route Direction: " + v.rtdir 
                   + "<br>"
-                  + "Scheduled Arrival Time: " + v.prd  
+                  + "Scheduled Arrival Time: " + v.prdtm  
                   + "<br>"
-                  +  "Time left until arrival: " + v.prdctdn 
+                  +  "Time left until arrival: " + v.prdctdn + " minutes"
+                  + "<br>"
+                  + "Delay: " + v.dly
+                  + "<br>"
+                  + "Destination: " + v.des
+                  + "<br>"
+                  + "Bus Number: " + v.vid
                   + "<hr>");
               })
 
