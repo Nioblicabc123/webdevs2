@@ -35,17 +35,16 @@
     <div id='container'>
       <div id='airhorn'>
         <div class='horn'>
-          <div class='inner'>
+          <div class='inner'> 
             <div class='center'></div>
           </div>
         </div>
       </div>
     </div>
-    
     <script src=./scripts/main.min.js></script>
     <script>
       if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js', { scope: '/' })
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
           .then(function(registration) {
                 console.log('Service Worker Registered');
           });
