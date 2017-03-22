@@ -8,13 +8,7 @@
     <style>
       .screen {display: none;}
       .hide {display: none;}
-      #list0 {display: none;}
       #error {display: none;}
-      .list1 {display: none;}
-      .list2 {display: none;}
-      .list3 {display: none;}
-      .list4 {display: none;}
-      #error2 {display: none;}
     </style>
   </head>
   <body>
@@ -23,7 +17,7 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Menu</span>
+          <span class="mdl-layout-title">3 Screen Menu</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
         </div>
@@ -31,18 +25,96 @@
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Menu</span>
         <nav class="mdl-navigation">
-          <a id="link1" class="mdl-navigation__link" href="#">About the App</a>
-          <a id="link2" class="mdl-navigation__link" href="#">Pictures</a>
-          <a id="link3" class="mdl-navigation__link" href="#">Information on Games</a>
+          <a id="link1" class="mdl-navigation__link" href="#">About us!</a>
+          <a id="link2" class="mdl-navigation__link" href="#">Video Game Pictures  </a>
+          <a id="link3" class="mdl-navigation__link" href="#">Video Game Information</a>
         </nav>
       </div>
       <main class="mdl-layout__content">
         <div id="about" class="screen page-content">
           <h1>About the App!</h1>
-
+          <img src="https://opc.olympus-imaging.com/wp-content/uploads/2014/10/about1.png" alt="about_us" style="width:304px;height:228px;">
+          <p></p>
+          
+          
+    
         </div>
-        <div id="schedule" class="screen page-content">
-          <h1>Schedule</h1>
+        <div id="settings" class="screen page-content">
+          <h1>Bus Tracker for California & Wabansia</h1>
+          
+          
+        
+          <iframe src="https://preview.c9users.io/ikwalker1/webdevs2/projects/BusTracker/CtaApi.html" width="200" height="1500">
+</iframe>
+        
+        
+        
+        
+        
+        </div>
+        
+        
+        
+        
+        
+        <div id="preview" class="screen page-content">
+          <h1>Pictures of me</h1>
+        </div>
+      </main>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+    var click = 0;
+    var add = 0;
+    var listitem= "list" + 0;
+      $(function() {
+        
+        $("#remind").show();
+        
+        $("#link1").on("click", function() {
+          $(".screen").hide();
+          $("#remind").show();
+        });
+        
+        $("#link2").on("click", function() {
+          $(".screen").hide();
+          $("#settings").show();
+        });
+        
+        $("#link3").on("click", function() {
+          $(".screen").hide();
+          $("#preview").show();
+        });
+      $("#Add").on("click", function() {
+        click = click + 1;
+        add = add + 1; 
+        listitem = "list" + add;
+        if (add <= 4){
+        
+        }
+        else if (add > 4){
+          $("#error").removeAttr("id");
+          $("#Add").prop("disabled",true);
+        }
+        $("#Subtract").on("click", function(){
+          if (add > 1){
+          add = add - 1;
+          }
+          else if (add == 0){
+            
+          }
+        });
+      });
+        $("#Save").on("click", function() {
+        
+        click = 0;
+        add = 0
+      });
+      })
+      
+      
+    </script>
     
   </body>
 </html>
