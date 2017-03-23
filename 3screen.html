@@ -69,6 +69,59 @@
         </div>
       </main>
     </div>
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+    var click = 0;
+    var add = 0;
+    var listitem= "list" + 0;
+      $(function() {
+        
+        $("#remind").show();
+        
+        $("#link1").on("click", function() {
+          $(".screen").hide();
+          $("#remind").show();
+        });
+        
+        $("#link2").on("click", function() {
+          $(".screen").hide();
+          $("#settings").show();
+        });
+        
+        $("#link3").on("click", function() {
+          $(".screen").hide();
+          $("#preview").show();
+        });
+      $("#Add").on("click", function() {
+        click = click + 1;
+        add = add + 1; 
+        listitem = "list" + add;
+        if (add <= 4){
+        
+        }
+        else if (add > 4){
+          $("#error").removeAttr("id");
+          $("#Add").prop("disabled",true);
+        }
+        $("#Subtract").on("click", function(){
+          if (add > 1){
+          add = add - 1;
+          }
+          else if (add == 0){
+            
+          }
+        });
+      });
+        $("#Save").on("click", function() {
+        
+        click = 0;
+        add = 0
+      });
+      })
+      
+      
+    </script>
     
   </body>
 </html>
