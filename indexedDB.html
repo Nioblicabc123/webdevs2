@@ -19,59 +19,94 @@
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-          <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Search Somebody</a>
-          <a href="#fixed-tab-2" class="mdl-layout__tab">Add Somebody</a>
-          <a href="#fixed-tab-3" class="mdl-layout__tab">About this App</a>
+          <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Search a Name</a>
+          <a href="#fixed-tab-2" class="mdl-layout__tab">Add a Name</a>
+          <a href="#fixed-tab-3" class="mdl-layout__tab">About this app</a>
         </div>
       </header>
       <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
           <div class="page-content">
-            <h2>Search a Name</h2>
-            <input id="search" placeholder="Enter the name here">
-            <button id="searchbtn">Search Database</button>
+            <br>
+<button id="show" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+Click to find a name
+</button>
+<div id="results">
+  
+</div>
+
           </div>
         </section>
         <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-          <div class="page-content"><h2>Add a Name</h2>
-          <input id="add" placeholder="Enter the name here">
-          <button id="addbtn">Add a Name</button>
+          <div class="page-content"><h2>Add a name</h2>
+          <form action="#">
+            <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="sample1">
+            <label class="mdl-textfield__label" for="sample1">Add somebody's name</label>
+            </div>
+            <button id="searchbtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+              Enter
+            </button>
+          </form>
           </div>
         </section>
         <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-          <div class="page-content"><h2>About The App</h2>
-            <p><strong>About Us</strong> - This app will show you the City Council Data of a person once a name is inputted in the 'Add Somebody' tab. Once you do this, you can use the 'Search Somebody' to then search the person's name in order to find them.</p></div>
+          <div class="page-content"><h2>About</h2>
+            <p><strong>Description</strong>: This app searches through the Chicago City Data Portal and searches for people who work in City Council.</p></div>
         </section>
       </main>
     </div>
     <script>
     var baseUrl = "https://data.cityofchicago.org/resource/tt4n-kn4t.json";
     var searchUrl = baseUrl + "?" + "department=" + "CITY COUNCIL";
-                $.getJSON(searchUrl)
-                
-                    .done(function(data){
-                       
-                       console.log(data);
-                       
-                        var db = new Dexie("employeeDB");
-                        db.version(1).stores({
-	                        employees: '++id,name,department,title,salary'
-                        });
-                        db.employees.count().then(function(count){
-                          console.log(count);
-                          
-                          if (count == 0){
-                            $.each(data, function(i, v){
-                              db.employees.add({
-                                name: v.name,
-                                title: v.job_titles,
-                                salary: v.employee_annual_salary,
-                                department: v.department
-                         });
-                       });
-                          }
-                        });
-                    });
+    $.getJSON(searchUrl)
+
+    .done(function(data) {
+
+      console.log(data);
+      // step 6
+      $("#show").on("click", function(){
+       $.each(data,function(i, v){
+                  $("#results").append(
+                                "<div>"
+                                +"<p>"
+                                +"Name: " + v.name
+                                +"<br>"
+                                + "Department: " + v.department
+                                +"<br>"
+                                + "Job: " + v.job_titles
+                                +"<br>"
+                                + "Salary: $" + v.employee_annual_salary
+                                + "<br>"
+                                + "<hr>"
+          );
+    });
+});
+
+      var db = new Dexie("employeeDB");
+      db.version(1).stores({
+        employees: '++id,name,department,title,salary'
+      });
+      db.employees.count().then(function(count) {
+        console.log(count);
+
+        if (count > 0) {
+          $.each(data, function(i, v) {
+            db.employees.add({
+              name: v.name,
+              title: v.job_titles,
+              salary: v.employee_annual_salary,
+              department: v.department
+            });
+          });
+        }
+      });
+    });
     </script>
+    <!-- Steps 7 and 8 -->
+    
+      <script>
+        
+      </script>
   </body>
 </html>
