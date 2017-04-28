@@ -1,0 +1,97 @@
+<html>
+  <head>
+      <link rel="manifest" href="./manifest.json">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body>
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+                mdl-layout--fixed-tabs">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Bus Tracker V2</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Tab 1</a>
+          <a href="#fixed-tab-2" class="mdl-layout__tab">Tab 2</a>
+          <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+      </div>
+      <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+          <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+          <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+          <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+      </main>
+    </div>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+      $("#rtX49").hide()
+      $("#rt49").hide()
+      $("#rt152").hide()
+      $("#submit").click(function() {
+         $("#rtX49").empty().show()
+         $("#rt49").empty().show()
+         $("#rt152").empty().show()
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "2iarWD3P3ws4fid45HWRHY4TR",
+                      "format":"json",
+                      "rt":"49,X49,152",
+                      "stpid":"8417,12527,12569,8195"
+              }
+            }).done (function (data) {
+              console.log(data);
+             $("#rtX49").append("<h2>Route X49</h2>")
+             $("#rt49").append("<h2>Route 49</h2>")
+             $("#rt152").append("<h2>Route 152</h2>")
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#rt" + v.rt).append("Route Number: " + v.rt
+                  +  "<br>" 
+                  + "Route Direction: " + v.rtdir 
+                  + "<br>"
+                  + "Scheduled Arrival Time: " + v.prdtm  
+                  + "<br>"
+                  +  "Time left until arrival: " + v.prdctdn + " minutes"
+                  + "<br>"
+                  + "Delay: " + v.dly
+                  + "<br>"
+                  + "Destination: " + v.des
+                  + "<br>"
+                  + "Bus Number: " + v.vid
+                  + "<hr>");
+              })
+
+            });
+        });
+           
+         
+  
+</script>
+  </body>
+</html>
